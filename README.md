@@ -42,14 +42,9 @@ An animated, four-level atlas of India's automotive value chain: the full lifecy
 - [How it works](#how-it-works)
 - [Project structure](#project-structure)
 - [Quick start](#quick-start)
-- [Deployment](#deployment)
 - [Data model](#data-model)
 - [Common tasks](#common-tasks)
 - [Methodology and sources](#methodology-and-sources)
-- [Responsiveness, accessibility and performance](#responsiveness-accessibility-and-performance)
-- [Security](#security)
-- [Browser support](#browser-support)
-- [Roadmap](#roadmap)
 - [Known limitations](#known-limitations)
 - [Contributing](#contributing)
 - [Disclaimer](#disclaimer)
@@ -248,27 +243,6 @@ Open <http://localhost:8000>.
 
 Opening `index.html` directly also works. Serving over HTTP is better because the Content Security Policy then behaves as it will online. Any static server works, for example `npx serve .`.
 
-## Deployment
-
-### GitHub Pages
-
-1. Go to **Settings → Pages**.
-2. Under **Build and deployment**, choose **Source: Deploy from a branch**.
-3. Select **Branch: `main`** and **folder: `/ (root)`**, then **Save**.
-4. After a minute or two the site is live at **<https://kaustubhbarve.github.io/Value-Chain-Autos/>**.
-
-All paths are relative, so the site works from this repository sub-path, a user site or a custom domain.
-
-### Custom domain (optional)
-
-1. Add the domain under **Settings → Pages → Custom domain**. GitHub creates a `CNAME` file.
-2. Point DNS at GitHub Pages: a `CNAME` record for a subdomain, or `A` records for an apex domain (see GitHub's Pages documentation for the current IP addresses).
-3. Tick **Enforce HTTPS** once the certificate is issued.
-
-### Any other static host
-
-Upload the folder as it is to Netlify, Vercel, Cloudflare Pages or an S3 bucket. There is no build command and the output directory is the repository root.
-
 ## Data model
 
 Everything on the page comes from `assets/js/data.js`. The constants are listed below in load order.
@@ -448,50 +422,6 @@ Anything that could not be confirmed carries a **to verify** tag on the page.
 **Industry figures.** SIAM (dispatches), ACMA (component turnover, supplies to vehicle makers, aftermarket, exports, imports), FADA (retail), IESA and EVreporter (EV registrations), Autocar India (fuel mix), ICICI Direct (GST 2.0 rates) and Crisil Ratings (rare-earth magnet imports).
 
 The full list of 36 sources and the verification log are in the site footer.
-
-## Responsiveness, accessibility and performance
-
-**Responsive**
-- Tested at 17 viewport sizes from 320 × 568 to 2560 × 1440, including landscape phones and tablets, with no horizontal scrolling at any size.
-- The header collapses into a menu below 900px.
-- The industry web switches from seven columns to stacked stages below 960px.
-- The drawer becomes a bottom sheet below 700px, and company tables become labelled cards below 520px.
-
-**Accessible**
-- Every interactive SVG element is keyboard focusable with a descriptive `aria-label`.
-- The drawer is a modal dialog with a focus trap, Escape to close, and focus returned to the opener.
-- Touch targets are at least 44px on touch devices, and chip lists give an alternative to small drawing hotspots.
-- Colour is never the only signal: supply direction is shown by line style and colour, and part status by label and swatch.
-
-**Fast**
-- One HTML file, one stylesheet and two scripts, about 200 KB before compression, with no framework or runtime dependencies.
-- Canvas and SVG animations stop when off screen or when the tab is hidden.
-- `prefers-reduced-motion` turns off animation.
-
-## Security
-
-- A **Content Security Policy** in `index.html` allows scripts only from this site, stylesheets from this site and Google Fonts, fonts from Google Fonts only, and no network calls (`connect-src 'none'`).
-- There are no inline scripts, no inline event handlers and no `eval`.
-- All data written into the page is HTML-escaped.
-- External links use `rel="noopener noreferrer"`.
-- No cookies, tracking, analytics or user data collection.
-
-## Browser support
-
-Built on standard web platform features: `ResizeObserver`, `IntersectionObserver`, CSS custom properties, `color-mix()` and dynamic viewport units.
-
-- **Supported:** current versions of Chrome, Edge, Firefox and Safari on desktop, Android and iOS.
-- **Tested:** automated testing was done in Chromium. Check Safari and Firefox manually after major changes.
-
-## Roadmap
-
-- [ ] Two-wheeler x-ray: two-wheelers are about 77% of Indian vehicle volumes.
-- [ ] Truck x-ray and an animated assembly line for the Assembly stop.
-- [ ] Verify the remaining "to verify" mappings against FY26 annual reports.
-- [ ] Add FY26 segment splits for Motherson, Bosch, Bharat Forge, Schaeffler and Tube Investments.
-- [ ] Add ACMA's product-level turnover and aftermarket tables.
-- [ ] A refresh script for market data.
-- [ ] Next sectors on the same engine.
 
 ## Known limitations
 
